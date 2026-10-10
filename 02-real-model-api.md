@@ -589,6 +589,6 @@ signal      取消信号
 
 协议参考入口：[OpenAI 函数调用指南](https://developers.openai.com/api/docs/guides/function-calling)、[Chat Completions API 参考](https://platform.openai.com/docs/api-reference/chat/create)。2026-10-10 本轮访问这两个官方页面均返回 HTTP 403，未能实时读取其内容；本文不据此声称最新接口已在线核验。接入真实服务时，请核对该服务当前文档。上述 Harness 源码映射已对照本地固定版本阅读。
 
-下一讲从 execute_tool() 出发，专门讨论“工具定义怎样与实现保持一致、参数如何校验、失败如何表达、权限在哪里执行”。
+继续阅读：[第三讲：工具执行器](03-tool-executor.md)，从 execute_tool() 出发讨论工具定义、参数校验、权限与结果处理。
 
 [返回学习路线](README.md) · [上一讲](01-model-tools-and-loop.md)
