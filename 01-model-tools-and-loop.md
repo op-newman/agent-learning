@@ -382,6 +382,6 @@ Cordis 的 ctx 是这些服务在程序中的访问入口。先把 ctx.llm 理�
 
 </details>
 
-下一讲可以从实验里的 call_model() 出发，逐步展开真实 API 的请求、工具 schema、响应解析和适配器。
+继续阅读：[第二讲：把模拟模型换成真实模型 API](02-real-model-api.md)，从 call_model() 出发展开真实 API 的请求、工具 schema、响应解析和适配器。
 
 [返回学习路线](README.md)
