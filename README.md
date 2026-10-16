@@ -27,11 +27,11 @@ python examples/01-minimal-loop.py
 | 03 工具执行器 | 怎样让工具调用可预测、可控、可排错？ | 实现注册、校验、权限、错误结果和协作式停止 | [第三讲已整理](03-tool-executor.md) |
 | 04 会话与状态 | 为什么不能只保留屏幕上的聊天文字？ | 保存事件，重建消息，理解恢复和副作用问题 | [第四讲已整理](04-session-and-state.md) |
 | 05 上下文管理 | 信息越来越多，怎样仍然让模型做对事？ | 理解上下文选择、工作区指令、技能和压缩 | [第五讲已整理](05-context-management.md) |
-| 06 可靠的循环 | 怎样处理流式输出、重试、取消和并发？ | 画出状态转换，处理未完成的工具调用 | 待展开 |
-| 07 Cordis 插件基础 | 模块怎样相互使用又能独立替换？ | 理解 Context、Service、依赖注入、事件、卸载 | 待展开 |
-| 08 Harness 装配 | 插件怎样组成不同的应用？ | 理解 profile、bundle、preset 和配置覆盖 | 待展开 |
-| 09 多 Agent 与工作流 | 什么时候值得委派，怎样协作和收尾？ | 实现一个有明确输入输出的子任务 | 待展开 |
-| 10 独立开发与评估 | 怎样证明自己的 Agent 在目标任务上有用？ | 开发一个插件或应用，用任务样例验证行为 | 待展开 |
+| 06 可靠的循环 | 怎样处理流式输出、重试、取消和并发？ | 画出状态转换，处理未完成的工具调用 | [第六讲已整理](06-reliable-loop.md) |
+| 07 Cordis 插件基础 | 模块怎样相互使用又能独立替换？ | 理解 Context、Service、依赖注入、事件、卸载 | [第七讲已整理](07-cordis-plugins.md) |
+| 08 Harness 装配 | 插件怎样组成不同的应用？ | 理解 profile、bundle、preset 和配置覆盖 | [第八讲已整理](08-harness-assembly.md) |
+| 09 多 Agent 与工作流 | 什么时候值得委派，怎样协作和收尾？ | 实现一个有明确输入输出的子任务 | [第九讲已整理](09-multi-agent-and-workflows.md) |
+| 10 独立开发与评估 | 怎样证明自己的 Agent 在目标任务上有用？ | 开发一个插件或应用，用任务样例验证行为 | [第十讲已整理](10-development-and-evaluation.md) |
 
 路线可以随理解程度调整。每次讨论优先解决当前层的问题。
 
@@ -42,6 +42,11 @@ python examples/01-minimal-loop.py
 - [第三讲：工具执行器怎样把请求变成行动](03-tool-executor.md)
 - [第四讲：会话日志、状态重建与崩溃恢复](04-session-and-state.md)
 - [第五讲：上下文管理怎样决定模型看见什么](05-context-management.md)
+- [第六讲：可靠的循环](06-reliable-loop.md)
+- [第七讲：Cordis 插件基础](07-cordis-plugins.md)
+- [第八讲：Harness 装配](08-harness-assembly.md)
+- [第九讲：多 Agent 与工作流](09-multi-agent-and-workflows.md)
+- [第十讲：独立开发与评估](10-development-and-evaluation.md)
 - [可运行实验：最小循环](examples/01-minimal-loop.py)
 - [真实 API 客户端：默认预览请求，--live 联网](examples/chat_completions_agent.py)
 - [本地 HTTP 协议测试](tests/test_real_api_protocol.py)
@@ -51,9 +56,19 @@ python examples/01-minimal-loop.py
 - [会话恢复和持久前缀行为测试](tests/test_session_log.py)
 - [上下文预算实验：指令、技能目录与压缩](examples/context_budget.py)
 - [上下文装配与压缩行为测试](tests/test_context_budget.py)
+- [可靠循环实验：流式、重试、取消与并发](examples/reliable_loop.py)
+- [可靠循环行为测试](tests/test_reliable_loop.py)
+- [Cordis 内核实验：服务、依赖与事件](examples/cordis_kernel.py)
+- [Cordis 内核行为测试](tests/test_cordis_kernel.py)
+- [装配层实验：profile、bundle 与 patch](examples/assembly_layers.py)
+- [装配层行为测试](tests/test_assembly_layers.py)
+- [多 Agent 与工作流实验：委派、任务板与工作流](examples/agent_team.py)
+- [多 Agent 与工作流行为测试](tests/test_agent_team.py)
+- [评估实验：录制回放、轨迹与副作用断言](examples/evaluation_harness.py)
+- [评估行为测试](tests/test_evaluation_harness.py)
 - [实验读取的示例文件](examples/fixture/package.json)
 
-示例只使用 Python 标准库。第一讲用固定规则的模拟模型展示数据流；第二讲默认预览请求，显式使用 --live 时才调用配置的模型 API；第三讲离线运行工具执行场景；第四讲用内存持久模型演示事件日志、消息投影和崩溃修复；第五讲离线演示工作区指令预算、技能目录按需加载和历史压缩投影。本地 HTTP 测试不连接在线模型。模拟响应和程序测试不能验证真实模型的判断能力。
+示例只使用 Python 标准库。第一讲用固定规则的模拟模型展示数据流；第二讲默认预览请求，显式使用 --live 时才调用配置的模型 API；第三讲离线运行工具执行场景；第四讲用内存持久模型演示事件日志、消息投影和崩溃修复；第五讲离线演示工作区指令预算、技能目录按需加载和历史压缩投影。第六讲离线演示流式事件、重试、取消与并发；第七讲用小型内核演示 Cordis 式服务、依赖和事件；第八讲演示 profile、bundle 与 patch 的分层装配；第九讲演示委派、任务板和工作流；第十讲演示录制回放、轨迹检查与副作用断言。本地 HTTP 测试不连接在线模型。模拟响应和程序测试不能验证真实模型的判断能力。
 
 ## 源码基线
 
@@ -65,4 +80,4 @@ python examples/01-minimal-loop.py
 
 ## 学习进度
 
-前五讲已整理。可以依次观察模型请求、工具执行、结果回传、事件日志，以及上下文预算、技能加载和长历史压缩。下一步进入可靠的循环，处理流式输出、重试、取消和并发。
+前十讲已整理。可以依次观察模型请求、工具执行、结果回传、事件日志、上下文预算、可靠循环、插件内核、分层装配、多 Agent 协作和独立评估，并用各讲的离线实验验证关键行为。
