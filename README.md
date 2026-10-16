@@ -26,7 +26,7 @@ python examples/01-minimal-loop.py
 | 02 真正连接模型 | 本地数据怎样变成 API 请求和响应？ | 编写真实 API 客户端，理解协议适配与联调 | [第二讲已整理](02-real-model-api.md) |
 | 03 工具执行器 | 怎样让工具调用可预测、可控、可排错？ | 实现注册、校验、权限、错误结果和协作式停止 | [第三讲已整理](03-tool-executor.md) |
 | 04 会话与状态 | 为什么不能只保留屏幕上的聊天文字？ | 保存事件，重建消息，理解恢复和副作用问题 | [第四讲已整理](04-session-and-state.md) |
-| 05 上下文管理 | 信息越来越多，怎样仍然让模型做对事？ | 理解上下文选择、工作区指令、技能和压缩 | 待展开 |
+| 05 上下文管理 | 信息越来越多，怎样仍然让模型做对事？ | 理解上下文选择、工作区指令、技能和压缩 | [第五讲已整理](05-context-management.md) |
 | 06 可靠的循环 | 怎样处理流式输出、重试、取消和并发？ | 画出状态转换，处理未完成的工具调用 | 待展开 |
 | 07 Cordis 插件基础 | 模块怎样相互使用又能独立替换？ | 理解 Context、Service、依赖注入、事件、卸载 | 待展开 |
 | 08 Harness 装配 | 插件怎样组成不同的应用？ | 理解 profile、bundle、preset 和配置覆盖 | 待展开 |
@@ -41,6 +41,7 @@ python examples/01-minimal-loop.py
 - [第二讲：把模拟模型换成真实模型 API](02-real-model-api.md)
 - [第三讲：工具执行器怎样把请求变成行动](03-tool-executor.md)
 - [第四讲：会话日志、状态重建与崩溃恢复](04-session-and-state.md)
+- [第五讲：上下文管理怎样决定模型看见什么](05-context-management.md)
 - [可运行实验：最小循环](examples/01-minimal-loop.py)
 - [真实 API 客户端：默认预览请求，--live 联网](examples/chat_completions_agent.py)
 - [本地 HTTP 协议测试](tests/test_real_api_protocol.py)
@@ -48,9 +49,11 @@ python examples/01-minimal-loop.py
 - [工具权限、参数和取消行为测试](tests/test_tool_runtime.py)
 - [会话日志实验：日志、投影与崩溃修复](examples/session_log.py)
 - [会话恢复和持久前缀行为测试](tests/test_session_log.py)
+- [上下文预算实验：指令、技能目录与压缩](examples/context_budget.py)
+- [上下文装配与压缩行为测试](tests/test_context_budget.py)
 - [实验读取的示例文件](examples/fixture/package.json)
 
-示例只使用 Python 标准库。第一讲用固定规则的模拟模型展示数据流；第二讲默认预览请求，显式使用 --live 时才调用配置的模型 API；第三讲离线运行工具执行场景；第四讲用内存持久模型演示事件日志、消息投影和崩溃修复。本地 HTTP 测试不连接在线模型。模拟响应和程序测试不能验证真实模型的判断能力。
+示例只使用 Python 标准库。第一讲用固定规则的模拟模型展示数据流；第二讲默认预览请求，显式使用 --live 时才调用配置的模型 API；第三讲离线运行工具执行场景；第四讲用内存持久模型演示事件日志、消息投影和崩溃修复；第五讲离线演示工作区指令预算、技能目录按需加载和历史压缩投影。本地 HTTP 测试不连接在线模型。模拟响应和程序测试不能验证真实模型的判断能力。
 
 ## 源码基线
 
@@ -62,4 +65,4 @@ python examples/01-minimal-loop.py
 
 ## 学习进度
 
-前四讲已整理。可以依次观察模型请求、工具执行、结果回传，以及事件日志如何重建历史和恢复崩溃。下一步进入上下文管理。
+前五讲已整理。可以依次观察模型请求、工具执行、结果回传、事件日志，以及上下文预算、技能加载和长历史压缩。下一步进入可靠的循环，处理流式输出、重试、取消和并发。
